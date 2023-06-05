@@ -1,0 +1,33 @@
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const routes = require('./routes/routes');
+
+const PORT = 4000;
+
+const mongoString = process.env.DATABASE_URL;
+
+// nodeapp --> mongodb :: mongoose
+
+mongoose.connect(mongoString);
+const database = mongoose.connection;
+
+// whether the database connection is true or false
+
+database.on('error', (error) => {
+  console.log(error);
+});
+
+database.once('connected', () => {
+  console.log('Database is connected');
+});
+
+const app = express();
+app.use('/api', routes);
+
+app.use(express.json()); //accept the data in the JSON format
+
+app.listen(PORT, () => {
+  console.log(`Server started at ${PORT}`);
+});
