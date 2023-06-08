@@ -1,9 +1,12 @@
 import './App.css';
+import Layout from './comonents/Layout';
 
 function App() {
-  return <div>
-    Rahul
-  </div>
+  return (
+    <>
+      <Layout />
+    </>
+  );
 }
 
 export default App;
