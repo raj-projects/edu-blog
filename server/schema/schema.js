@@ -7,6 +7,23 @@ const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema } = graphql;
 const RootQuery = new GraphQLObjectType({
   name: 'Root',
   fields: () => ({
+    // Fetch all posts
+    posts: {
+      type: new graphql.GraphQLList(PostQuery),
+      resolve(parent, args) {
+        return posts;
+      },
+    },
+
+    // fetch single post
+    post: {
+      type: PostQuery,
+      args: { id: { type: graphql.GraphQLID } },
+      resolve(parent, args) {
+        return posts.find((post) => post.id === args.id);
+      },
+    },
+
     // Fetch all uesrs
     users: {
       type: new graphql.GraphQLList(UserQuery),
@@ -23,6 +40,17 @@ const RootQuery = new GraphQLObjectType({
         return users.find((user) => user.id === args.id);
       },
     },
+  }),
+});
+
+// Post Query
+const PostQuery = new GraphQLObjectType({
+  name: 'Post',
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    status: { type: GraphQLString },
   }),
 });
 
