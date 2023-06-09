@@ -68,6 +68,18 @@ const PostQuery = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
+    category: {
+      type: CategoryQuery,
+      resolve(parent, args) {
+        return categories.find((category) => category.id === parent.categoryId);
+      }
+    },
+    user: {
+      type: UserQuery,
+      resolve(parent, args) {
+        return users.find((user) => user.id === parent.userId);
+      }
+    }
   }),
 });
 
