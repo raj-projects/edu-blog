@@ -1,5 +1,10 @@
 const graphql = require('graphql');
-const { posts, categories, users } = require('../db/sample.js');
+// const { posts, categories, users } = require('../db/sample.js');
+
+// Imports Models
+const PostModel = require('../models/post.model');
+const CategoryModel = require('../models/category.model');
+const UserModel = require('../models/user.model');
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema } = graphql;
 
@@ -11,7 +16,7 @@ const RootQuery = new GraphQLObjectType({
     posts: {
       type: new graphql.GraphQLList(PostQuery),
       resolve(parent, args) {
-        return posts;
+        return PostModel.find();
       },
     },
 
@@ -20,7 +25,7 @@ const RootQuery = new GraphQLObjectType({
       type: PostQuery,
       args: { id: { type: graphql.GraphQLID } },
       resolve(parent, args) {
-        return posts.find((post) => post.id === args.id);
+        return PostModel.findById(args.id);
       },
     },
 
@@ -28,7 +33,7 @@ const RootQuery = new GraphQLObjectType({
     categories: {
       type: new graphql.GraphQLList(CategoryQuery),
       resolve(parent, args) {
-        return categories;
+        return CategoryModel.find();
       },
     },
 
@@ -37,7 +42,7 @@ const RootQuery = new GraphQLObjectType({
       type: CategoryQuery,
       args: { id: { type: graphql.GraphQLID } },
       resolve(parent, args) {
-        return categories.find((category) => category.id === args.id);
+        return CategoryModel.findById(args.id);
       },
     },
 
@@ -45,7 +50,7 @@ const RootQuery = new GraphQLObjectType({
     users: {
       type: new graphql.GraphQLList(UserQuery),
       resolve(parent, args) {
-        return users;
+        return UserModel.find();
       },
     },
 
@@ -54,7 +59,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserQuery,
       args: { id: { type: graphql.GraphQLID } },
       resolve(parent, args) {
-        return users.find((user) => user.id === args.id);
+        return UserModel.find(args.id);
       },
     },
   }),
@@ -71,13 +76,13 @@ const PostQuery = new GraphQLObjectType({
     category: {
       type: CategoryQuery,
       resolve(parent, args) {
-        return categories.find((category) => category.id === parent.categoryId);
+        return categories.findById(parent.categoryId);
       }
     },
     user: {
       type: UserQuery,
       resolve(parent, args) {
-        return users.find((user) => user.id === parent.userId);
+        return users.findById(parent.userId);
       }
     }
   }),
@@ -89,7 +94,6 @@ const CategoryQuery = new GraphQLObjectType({
   fields: () => ({
     id: { type: graphql.GraphQLID },
     name: { type: GraphQLString },
-    type: { type: GraphQLString },
     status: { type: GraphQLString },
   }),
 });
