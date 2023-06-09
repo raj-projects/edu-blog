@@ -7,6 +7,15 @@ const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema } = graphql;
 const RootQuery = new GraphQLObjectType({
   name: 'Root',
   fields: () => ({
+    // Fetch all uesrs
+    users: {
+      type: new graphql.GraphQLList(UserQuery),
+      resolve(parent, args) {
+        return users;
+      },
+    },
+
+    // fetch single user
     user: {
       type: UserQuery,
       args: { id: { type: graphql.GraphQLID } },
@@ -23,11 +32,11 @@ const UserQuery = new GraphQLObjectType({
   fields: () => ({
     id: { type: graphql.GraphQLID },
     name: { type: GraphQLString },
-    email: { type: GraphQLString },
-    phone: { type: GraphQLString },
+    type: { type: GraphQLString },
+    status: { type: GraphQLString },
   }),
 });
 
 module.exports = new GraphQLSchema({
-    query: RootQuery
-})
+  query: RootQuery,
+});
