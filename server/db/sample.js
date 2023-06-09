@@ -55,10 +55,12 @@ const categories = [
   {
     id: '1',
     name: 'Cat1',
+    status: 'Active',
   },
   {
     id: '2',
     name: 'Cat2',
+    status: 'Deactive',
   },
 ];
 

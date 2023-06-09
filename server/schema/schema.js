@@ -24,6 +24,23 @@ const RootQuery = new GraphQLObjectType({
       },
     },
 
+    // Fetch all categories
+    categories: {
+      type: new graphql.GraphQLList(CategoryQuery),
+      resolve(parent, args) {
+        return categories;
+      },
+    },
+
+    // fetch single categories
+    category: {
+      type: CategoryQuery,
+      args: { id: { type: graphql.GraphQLID } },
+      resolve(parent, args) {
+        return categories.find((category) => category.id === args.id);
+      },
+    },
+
     // Fetch all uesrs
     users: {
       type: new graphql.GraphQLList(UserQuery),
@@ -50,6 +67,17 @@ const PostQuery = new GraphQLObjectType({
     id: { type: graphql.GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
+    status: { type: GraphQLString },
+  }),
+});
+
+// Category Query
+const CategoryQuery = new GraphQLObjectType({
+  name: 'Category',
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    name: { type: GraphQLString },
+    type: { type: GraphQLString },
     status: { type: GraphQLString },
   }),
 });
