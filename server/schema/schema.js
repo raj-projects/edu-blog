@@ -14,6 +14,50 @@ const {
   GraphQLEnumType,
 } = graphql;
 
+// Post Query
+const PostType = new GraphQLObjectType({
+  name: 'Post',
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    status: { type: GraphQLString },
+    category: {
+      type: CategoryType,
+      resolve(parent, args) {
+        return categories.findById(parent.categoryId);
+      },
+    },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return users.findById(parent.userId);
+      },
+    },
+  }),
+});
+
+// Category Query
+const CategoryType = new GraphQLObjectType({
+  name: 'Category',
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    name: { type: GraphQLString },
+    status: { type: GraphQLString },
+  }),
+});
+
+// User Query
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  fields: () => ({
+    id: { type: graphql.GraphQLID },
+    name: { type: GraphQLString },
+    type: { type: GraphQLString },
+    status: { type: GraphQLString },
+  }),
+});
+
 // Root Query
 const RootQuery = new GraphQLObjectType({
   name: 'Root',
@@ -71,50 +115,6 @@ const RootQuery = new GraphQLObjectType({
   }),
 });
 
-// Post Query
-const PostType = new GraphQLObjectType({
-  name: 'Post',
-  fields: () => ({
-    id: { type: graphql.GraphQLID },
-    name: { type: GraphQLString },
-    description: { type: GraphQLString },
-    status: { type: GraphQLString },
-    category: {
-      type: CategoryType,
-      resolve(parent, args) {
-        return categories.findById(parent.categoryId);
-      },
-    },
-    user: {
-      type: UserType,
-      resolve(parent, args) {
-        return users.findById(parent.userId);
-      },
-    },
-  }),
-});
-
-// Category Query
-const CategoryType = new GraphQLObjectType({
-  name: 'Category',
-  fields: () => ({
-    id: { type: graphql.GraphQLID },
-    name: { type: GraphQLString },
-    status: { type: GraphQLString },
-  }),
-});
-
-// User Query
-const UserType = new GraphQLObjectType({
-  name: 'User',
-  fields: () => ({
-    id: { type: graphql.GraphQLID },
-    name: { type: GraphQLString },
-    type: { type: GraphQLString },
-    status: { type: GraphQLString },
-  }),
-});
-
 // Mutation
 const Mutation = new GraphQLObjectType({
   name: 'Create',
@@ -125,15 +125,24 @@ const Mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         type: { type: GraphQLString },
-        status: { type: GraphQLString },
+        status: {
+          type: new GraphQLEnumType({
+            name: 'UserStatus',
+            values: {
+              'active': { value: 'Active' },
+              'Deactive': { value: 'De Active' },
+            },
+          }),
+          defaultValue: 'Active',
+        },
       },
       resolve(parent, args, context, info) {
-        const addUser = new UserModel({
+        const user = new UserModel({
           name: args.name,
           type: args.type,
           status: args.status,
         });
-        return addUser.save();
+        return user.save();
       },
     },
 
@@ -185,11 +194,11 @@ const Mutation = new GraphQLObjectType({
         },
       },
       resolve(parent, args, context, info) {
-        const addCategory = new CategoryModel({
+        const category = new CategoryModel({
           name: args.name,
           status: args.status,
         });
-        return addCategory.save();
+        return category.save();
       },
     },
   },
