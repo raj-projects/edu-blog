@@ -119,6 +119,9 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Create',
   fields: {
+    /*=================================
+      ADD MUtation
+    =================================*/
     // Add User
     addUser: {
       type: UserType,
@@ -129,8 +132,8 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: 'UserStatus',
             values: {
-              'active': { value: 'Active' },
-              'Deactive': { value: 'De Active' },
+              active: { value: 'Active' },
+              Deactive: { value: 'De Active' },
             },
           }),
           defaultValue: 'Active',
@@ -156,8 +159,8 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: 'PostStatus',
             values: {
-              'notPublished': { value: 'Not Published' },
-              'published': { value: 'Published' },
+              notPublished: { value: 'Not Published' },
+              published: { value: 'Published' },
             },
           }),
           defaultValue: 'Not Published',
@@ -186,8 +189,8 @@ const Mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: 'CategoryStatus',
             values: {
-              'active': { value: 'Active' },
-              'Deactive': { value: 'De Active' },
+              active: { value: 'Active' },
+              Deactive: { value: 'De Active' },
             },
           }),
           defaultValue: 'Active',
@@ -199,6 +202,42 @@ const Mutation = new GraphQLObjectType({
           status: args.status,
         });
         return category.save();
+      },
+    },
+
+    /*=================================
+      DELETE MUtation
+    =================================*/
+    // Delete User
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLID },
+      },
+      resolve(parent, args, context, info) {
+        return UserModel.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Delete Post
+    deletePost: {
+      type: PostType,
+      args: {
+        id: { type: GraphQLID },
+      },
+      resolve(parent, args, context, info) {
+        return PostModel.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Delete Category
+    deleteCategory: {
+      type: CategoryType,
+      args: {
+        id: { type: GraphQLID },
+      },
+      resolve(parent, args, context, info) {
+        return CategoryModel.findByIdAndRemove(args.id);
       },
     },
   },
