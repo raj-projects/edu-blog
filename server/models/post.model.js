@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Active', 'De-Active']
+    enum: ['Published', 'Not Published']
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
