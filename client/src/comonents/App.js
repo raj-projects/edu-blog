@@ -1,29 +1,22 @@
-import { Container } from '@mui/material';
 import React from 'react';
 import Footer from './layout/Footer';
 import Header from './layout/Header';
 import Sidebar from './layout/Sidebar';
-import { Grid, makeStyles } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import About from '../pages/userPanel/About';
 import PageNotFound from '../pages/userPanel/PageNotFound';
 import Home from '../pages/userPanel/Home';
 import Categories from '../pages/userPanel/Categories';
 import Contact from '../pages/userPanel/Contact';
+import Dashboard from '../pages/adminPanel/Dashboard';
 
-// const useStyles = makeStyles({
-//   mainContainer: {
-
-//   }
-// })
 
 function App() {
-  // const classes = useStyles();
-
   return (
     <>
       <Header />
-      <Container sx={{ flexGrow: 1 }}>
+      <Container sx={{ marginTop: '80px' }}>
         <Grid container spacing={2}>
           <Grid item xs={8}>
             <Routes>
@@ -31,6 +24,7 @@ function App() {
               <Route path="about" element={<About />} />
               <Route path="category" element={<Categories />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </Grid>

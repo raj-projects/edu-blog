@@ -28,7 +28,7 @@ function Footer(props) {
           {title}
         </Typography>
         <Typography
-          variant="subtitle1"
+          variant="subtitle"
           align="center"
           color="text.secondary"
           component="p"

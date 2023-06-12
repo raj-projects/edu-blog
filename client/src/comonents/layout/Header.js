@@ -21,7 +21,7 @@ function Header() {
             <Typography variant="h6" component="div">
               EduBlogs
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <Link to="/" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>Home</Link>
               <Link to="/about" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>About</Link>
               <Link to="/category" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>Categories</Link>
