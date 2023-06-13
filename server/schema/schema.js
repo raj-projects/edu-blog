@@ -128,16 +128,17 @@ const Mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         type: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: 'UserStatus',
-            values: {
-              active: { value: 'Active' },
-              deactive: { value: 'De-Active' },
-            },
-          }),
-          defaultValue: 'Active',
-        },
+        status: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: 'UserStatus',
+        //     values: {
+        //       active: { value: 'Active' },
+        //       deactive: { value: 'De-Active' },
+        //     },
+        //   }),
+        //   defaultValue: 'Active',
+        // },
       },
       resolve(parent, args, context, info) {
         const user = new UserModel({
@@ -155,16 +156,17 @@ const Mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: 'PostStatus',
-            values: {
-              notPublished: { value: 'Not Published' },
-              published: { value: 'Published' },
-            },
-          }),
-          defaultValue: 'Not Published',
-        },
+        status: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: 'PostStatus',
+        //     values: {
+        //       notPublished: { value: 'Not Published' },
+        //       published: { value: 'Published' },
+        //     },
+        //   }),
+        //   defaultValue: 'Not Published',
+        // },
         categoryId: { type: GraphQLID },
         userId: { type: GraphQLID },
       },
@@ -185,16 +187,17 @@ const Mutation = new GraphQLObjectType({
       type: CategoryType,
       args: {
         name: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: 'CategoryStatus',
-            values: {
-              active: { value: 'Active' },
-              deactive: { value: 'De-Active' },
-            },
-          }),
-          defaultValue: 'Active',
-        },
+        type: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: 'CategoryStatus',
+        //     values: {
+        //       active: { value: 'Active' },
+        //       deactive: { value: 'De-Active' },
+        //     },
+        //   }),
+        //   defaultValue: 'Active',
+        // },
       },
       resolve(parent, args, context, info) {
         const category = new CategoryModel({
@@ -215,7 +218,7 @@ const Mutation = new GraphQLObjectType({
         id: { type: GraphQLID },
       },
       resolve(parent, args, context, info) {
-        return UserModel.findByIdAndRemove(args.id);
+        return UserModel.findByIdAndDelete(args.id);
       },
     },
 
