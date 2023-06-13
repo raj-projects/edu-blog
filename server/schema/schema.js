@@ -187,7 +187,7 @@ const Mutation = new GraphQLObjectType({
       type: CategoryType,
       args: {
         name: { type: GraphQLString },
-        type: { type: GraphQLString },
+        status: { type: GraphQLString },
         // status: {
         //   type: new GraphQLEnumType({
         //     name: 'CategoryStatus',
