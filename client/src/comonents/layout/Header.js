@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -11,23 +10,74 @@ function Header() {
     <AppBar sx={{ marginBottom: '10px' }}>
       <Box position="static">
         <Toolbar>
-          <Container
+          <Box
             sx={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
+              maxWidth: '1440px',
+              width: '100%',
+              margin: '0 auto',
             }}
           >
-            <Typography variant="h6" component="div">
-              EduBlogs
+            <Typography to="/" variant="h5" component="div">
+              <Link to="/" style={{ textDecoration: 'none', color: '#fff', fontWeight: 'bo;d' }}>
+                EduBlogs
+              </Link>
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <Link to="/" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>Home</Link>
-              <Link to="/about" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>About</Link>
-              <Link to="/category" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>Categories</Link>
-              <Link to="/contact" style={{padding: '0 10px', textDecoration: 'none', color: '#fff', cursor: 'pointer'}}>Contact</Link>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <Link
+                to="/"
+                style={{
+                  padding: '0 10px',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                Home
+              </Link>
+              <Link
+                to="about"
+                style={{
+                  padding: '0 10px',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                About
+              </Link>
+              <Link
+                to="category"
+                style={{
+                  padding: '0 10px',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                Categories
+              </Link>
+              <Link
+                to="contact"
+                style={{
+                  padding: '0 10px',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                Contact
+              </Link>
             </Box>
-          </Container>
+          </Box>
         </Toolbar>
       </Box>
     </AppBar>

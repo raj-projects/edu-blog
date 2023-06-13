@@ -1,7 +1,26 @@
 import * as React from 'react';
-import { Container, Box, Typography, Stack } from '@mui/material';
+import {
+  Container,
+  Box,
+  Typography,
+  Stack,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Chip,
+} from '@mui/material';
+import InboxIcon from '@mui/icons-material/Inbox';
+import { useQuery } from '@apollo/client';
+import { GET_CATEGORIES } from '../../queries/queries';
 
 function Sidebar() {
+  const { loading, error, data } = useQuery(GET_CATEGORIES);
+
+  if (loading) return <p>It's Loading </p>;
+  if (error) return <p>There is an error : {error.message} </p>;
+
   return (
     <Container
       sx={{
@@ -21,18 +40,26 @@ function Sidebar() {
             borderColor: 'divider',
             backgroundColor: '#777',
             color: '#fff',
-            padding: '0 10px',
+            padding: '5px 10px',
+            fontWeight: 600,
           }}
         >
           Recent Posts
         </Typography>
-        <Stack
-          sx={{
-            padding: '0 10px',
-          }}
-        >
-          <Typography>hgghghgh</Typography>
-        </Stack>
+        <List sx={{ height: '220px', overflow: 'auto', paddingTop: 0 }}>
+          {data.categories.map((category) => {
+            return (
+              <ListItem disablePadding key={category.id}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={category.name} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
       </Box>
       <Box sx={{ height: '300px' }}>
         <Typography
@@ -43,18 +70,26 @@ function Sidebar() {
             borderColor: 'divider',
             backgroundColor: '#777',
             color: '#fff',
-            padding: '0 10px',
+            padding: '5px 10px',
+            fontWeight: 600,
           }}
         >
-          Archives
+          Categories
         </Typography>
-        <Stack
-          sx={{
-            padding: '0 10px',
-          }}
-        >
-          <Typography>hgghghgh</Typography>
-        </Stack>
+        <List sx={{ height: '220px', overflow: 'auto', paddingTop: 0 }}>
+          {data.categories.map((category) => {
+            return (
+              <ListItem disablePadding key={category.id}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={category.name} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
       </Box>
       <Box sx={{ height: '200px' }}>
         <Typography
@@ -65,18 +100,31 @@ function Sidebar() {
             borderColor: 'divider',
             backgroundColor: '#777',
             color: '#fff',
-            padding: '0 10px',
+            padding: '5px 10px',
+            fontWeight: 600,
           }}
         >
           Social
         </Typography>
-        <Stack
-          sx={{
-            padding: '0 10px',
-          }}
-        >
-          <Typography>hgghghgh</Typography>
-        </Stack>
+        <Box sx={{ maxHeight: '150px', overflow: 'auto', paddingTop: '8px' }}>
+          <Stack
+            direction="row"
+            sx={{
+              flexWrap: 'wrap',
+              gap: '7px',
+            }}
+          >
+            {data.categories.map((category) => {
+              return (
+                <Chip
+                  key={category.id}
+                  label={category.name}
+                  variant="outlined"
+                />
+              );
+            })}
+          </Stack>
+        </Box>
       </Box>
     </Container>
   );

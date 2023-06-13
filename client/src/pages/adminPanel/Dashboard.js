@@ -1,43 +1,24 @@
 import React from 'react';
-import { Grid, Container } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
-import DashboardHeader from './components/DashboardHeader';
-import PageNotFound from '../userPanel/PageNotFound';
-import Users from './pages/users/Users';
-import AddUser from './pages/users/AddUser';
-import Posts from './pages/posts/Posts';
-import AddPost from './pages/posts/AddPost';
-import Categories from '../userPanel/Categories';
-import AddCategory from './pages/categories/AddCategory';
+import { Grid, Box } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import DashboardHeader from '../../comonents/layout/DashboardHeader';
+import DashboardSidebar from '../../comonents/layout/DashboardSidebar';
 import Footer from '../../comonents/layout/Footer';
 
 function Dashboard() {
   return (
     <>
       <DashboardHeader />
-      <Container sx={{ marginTop: '80px' }}>
+      <Box sx={{ marginTop: '65px', minHeight: '85vh' }}>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            {/* <Sidebar /> */}
+          <Grid item xs={3}>
+            <DashboardSidebar />
           </Grid>
-          <Grid item xs={8}>
-            <Routes>
-              <Route path="dashboard/" element={<Dashboard />}>
-                <Route path="users" element={<Users />}>
-                  <Route path="adduser" element={<AddUser />} />
-                </Route>
-                <Route path="posts" element={<Posts />}>
-                  <Route path="addpost" element={<AddPost />} />
-                </Route>
-                <Route path="category" element={<Categories />}>
-                  <Route path="addcategory" element={<AddCategory />} />
-                </Route>
-              </Route>
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
+          <Grid item xs={8} sx={{ marginTop: '40px', marginBottom: '20px' }}>
+            <Outlet />
           </Grid>
         </Grid>
-      </Container>
+      </Box>
       <Footer />
     </>
   );

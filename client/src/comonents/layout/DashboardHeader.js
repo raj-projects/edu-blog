@@ -17,18 +17,19 @@ function DashboardHeader() {
               justifyContent: 'space-between',
             }}
           >
-            <Typography variant="h6" component="div">
-              EduBlogs
-            </Typography>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
+              <Typography variant="h6" component="div">
+                EduBlogs
+              </Typography>
               <Link
-                to="/dashboard/posts"
+                to="/"
                 style={{
                   padding: '0 10px',
                   textDecoration: 'none',
@@ -36,29 +37,7 @@ function DashboardHeader() {
                   cursor: 'pointer',
                 }}
               >
-                Posts
-              </Link>
-              <Link
-                to="/dashboard/categories"
-                style={{
-                  padding: '0 10px',
-                  textDecoration: 'none',
-                  color: '#fff',
-                  cursor: 'pointer',
-                }}
-              >
-                Categories
-              </Link>
-              <Link
-                to="/dashboard/users"
-                style={{
-                  padding: '0 10px',
-                  textDecoration: 'none',
-                  color: '#fff',
-                  cursor: 'pointer',
-                }}
-              >
-                Users
+                Logout
               </Link>
             </Box>
           </Box>
