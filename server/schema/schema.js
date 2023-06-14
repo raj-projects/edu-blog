@@ -1,5 +1,4 @@
 const graphql = require('graphql');
-// const { posts, categories, users } = require('../db/sample.js');
 
 // Imports Models
 const PostModel = require('../models/post.model');
@@ -53,6 +52,8 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: graphql.GraphQLID },
     name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
     type: { type: GraphQLString },
     status: { type: GraphQLString },
   }),
@@ -127,6 +128,8 @@ const Mutation = new GraphQLObjectType({
       type: UserType,
       args: {
         name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        type: { type: GraphQLString },
         type: { type: GraphQLString },
         status: { type: GraphQLString },
         // status: {
@@ -143,6 +146,8 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args, context, info) {
         const user = new UserModel({
           name: args.name,
+          email: args.type,
+          password: args.type,
           type: args.type,
           status: args.status,
         });
@@ -253,6 +258,8 @@ const Mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID },
         name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
         type: { type: GraphQLString },
         status: { type: GraphQLString },
         // status: {
@@ -271,6 +278,8 @@ const Mutation = new GraphQLObjectType({
           {
             $set: {
               name: args.name,
+              email: args.email,
+              password: args.password,
               type: args.type,
               status: args.status,
             },
@@ -343,6 +352,11 @@ const Mutation = new GraphQLObjectType({
         );
       },
     },
+
+    /*=================================
+      AUTH Mutation
+    =================================*/
+
   },
 });
 
