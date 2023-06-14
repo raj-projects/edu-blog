@@ -11,6 +11,17 @@ const GET_USERS = gql`
   }
 `;
 
+const GET_USER = gql`
+  query getUser($id: ID!) {
+    user(id: $id) {
+      id
+      name
+      type
+      status
+    }
+  }
+`;
+
 const GET_POSTS = gql`
   query getPosts {
     posts {
@@ -18,6 +29,23 @@ const GET_POSTS = gql`
       name
       description
       status
+    }
+  }
+`;
+
+const GET_POST = gql`
+  query getPost($id: ID!) {
+    post(id: $id) {
+      id
+      name
+      description
+      status
+      user {
+        id
+        name
+        type
+        status
+      }
     }
   }
 `;
@@ -35,35 +63,35 @@ const GET_CATEGORIES = gql`
 /*========================
   Delete Mutations
 ========================*/
-const DELETE_USER = gql `
+const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
     deleteUser(id: $id) {
-    id
-    name
-    type
-    status
-  }
+      id
+      name
+      type
+      status
+    }
   }
 `;
 
-const DELETE_POST = gql `
+const DELETE_POST = gql`
   mutation deletePost($id: ID!) {
     deletePost(id: $id) {
-    id
-    name
-    description
-    status
-  }
+      id
+      name
+      description
+      status
+    }
   }
 `;
 
-const DELETE_CATEGORY = gql `
+const DELETE_CATEGORY = gql`
   mutation deleteCategory($id: ID!) {
     deleteCategory(id: $id) {
-    id
-    name
-    status
-  }
+      id
+      name
+      status
+    }
   }
 `;
 
@@ -81,12 +109,37 @@ const ADD_USER = gql`
   }
 `;
 
+const ADD_POST = gql`
+  mutation AddPost($name: String!, $description: String!, $status: String!) {
+    addPost(name: $name, description: $description, status: $status) {
+      id
+      name
+      description
+      status
+    }
+  }
+`;
+
+const ADD_CATEGORY = gql`
+  mutation AddCategory($name: String!, $status: String!) {
+    addCategory(name: $name, status: $status) {
+      id
+      name
+      status
+    }
+  }
+`;
+
 export {
   GET_USERS,
+  GET_USER,
   GET_POSTS,
+  GET_POST,
   GET_CATEGORIES,
   DELETE_USER,
   DELETE_POST,
   DELETE_CATEGORY,
   ADD_USER,
+  ADD_POST,
+  ADD_CATEGORY,
 };

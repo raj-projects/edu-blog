@@ -1,9 +1,7 @@
 import React from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import {
-  Button,
   Grid,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -13,9 +11,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { GET_CATEGORIES } from '../../../../queries/queries';
+import AddCategory from './AddCategory';
+import CategoriesRow from './CategoriesRow';
 
 const CategoryList = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -31,9 +29,7 @@ const CategoryList = () => {
           <Typography variant="h4">Categories List</Typography>
         </Grid>
         <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'right' }}>
-          <Button variant="contained" color="success">
-            Add New Category
-          </Button>
+          <AddCategory />
         </Grid>
       </Grid>
       <TableContainer component={Paper}>
@@ -60,28 +56,7 @@ const CategoryList = () => {
           </TableHead>
           <TableBody>
             {data.categories.map((category) => {
-              return (
-                <TableRow
-                  key={category.id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell>{category.id}</TableCell>
-                  <TableCell>{category.name}</TableCell>
-                  <TableCell>{category.status}</TableCell>
-                  <TableCell align="right">
-                    <IconButton
-                      aria-label="edit"
-                      size="small"
-                      sx={{ marginRight: '20px' }}
-                    >
-                      <EditIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton aria-label="delete" size="small">
-                      <DeleteIcon fontSize="small" color="error" />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              );
+              return <CategoriesRow key={category.id} category={category} />;
             })}
           </TableBody>
         </Table>

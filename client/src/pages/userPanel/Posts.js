@@ -31,7 +31,7 @@ const Posts = () => {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {post.name}
+                <a href={`/posts/${post.id}`}>{post.name}</a>
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {post.description}

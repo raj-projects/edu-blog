@@ -22,7 +22,7 @@ const style = {
 export default function AddUser() {
   const [open, setOpen] = React.useState(false);
   const [formState, setFormState] = React.useState({
-    name: 'test1',
+    name: 'Test User 1',
     type: 'user',
     status: 'Active',
   });

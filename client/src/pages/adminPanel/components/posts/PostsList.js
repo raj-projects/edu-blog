@@ -1,9 +1,7 @@
-import React from 'react';
-import { gql, useQuery } from '@apollo/client';
+import React, { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 import {
-  Button,
   Grid,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -13,9 +11,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { GET_POSTS } from '../../../../queries/queries';
+import { DELETE_POST, GET_POSTS } from '../../../../queries/queries';
+import AddPost from './AddPost';
+import PostsRow from './PostsRow';
 
 const PostsList = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -31,9 +29,7 @@ const PostsList = () => {
           <Typography variant="h4">Posts List</Typography>
         </Grid>
         <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'right' }}>
-          <Button variant="contained" color="success">
-            Add New Post
-          </Button>
+          <AddPost />
         </Grid>
       </Grid>
       <TableContainer component={Paper}>
@@ -60,28 +56,7 @@ const PostsList = () => {
           </TableHead>
           <TableBody>
             {data.posts.map((post) => {
-              return (
-                <TableRow
-                  key={post.id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell>{post.id}</TableCell>
-                  <TableCell>{post.name}</TableCell>
-                  <TableCell>{post.status}</TableCell>
-                  <TableCell align="right">
-                    <IconButton
-                      aria-label="edit"
-                      size="small"
-                      sx={{ marginRight: '20px' }}
-                    >
-                      <EditIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton aria-label="delete" size="small">
-                      <DeleteIcon fontSize="small" color="error" />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              );
+              return <PostsRow key={post.id} post={post} />;
             })}
           </TableBody>
         </Table>
