@@ -40,12 +40,6 @@ const GET_POST = gql`
       name
       description
       status
-      user {
-        id
-        name
-        type
-        status
-      }
     }
   }
 `;
@@ -53,6 +47,16 @@ const GET_POST = gql`
 const GET_CATEGORIES = gql`
   query getCategories {
     categories {
+      id
+      name
+      status
+    }
+  }
+`;
+
+const GET_CATEGORY = gql`
+  query getCategory($id: ID!) {
+    category(id: $id) {
       id
       name
       status
@@ -130,16 +134,70 @@ const ADD_CATEGORY = gql`
   }
 `;
 
+/*========================
+  Update Mutations
+========================*/
+const UPDATE_USER = gql`
+  mutation UpdateUser(
+    $id: ID!
+    $name: String!
+    $type: String!
+    $status: String!
+  ) {
+    updateUser(id: $id, name: $name, type: $type, status: $status) {
+      id
+      name
+      type
+      status
+    }
+  }
+`;
+
+const UPDATE_POST = gql`
+  mutation UpdatePost(
+    $id: ID!
+    $name: String!
+    $description: String!
+    $status: String!
+  ) {
+    updatePost(
+      id: $id
+      name: $name
+      description: $description
+      status: $status
+    ) {
+      id
+      name
+      description
+      status
+    }
+  }
+`;
+
+const UPDATE_CATEGORY = gql`
+  mutation UpdateCategory($id: ID!, $name: String!, $status: String!) {
+    updateCategory(id: $id, name: $name, status: $status) {
+      id
+      name
+      status
+    }
+  }
+`;
+
 export {
   GET_USERS,
   GET_USER,
   GET_POSTS,
   GET_POST,
   GET_CATEGORIES,
+  GET_CATEGORY,
   DELETE_USER,
   DELETE_POST,
   DELETE_CATEGORY,
   ADD_USER,
   ADD_POST,
   ADD_CATEGORY,
+  UPDATE_USER,
+  UPDATE_POST,
+  UPDATE_CATEGORY,
 };

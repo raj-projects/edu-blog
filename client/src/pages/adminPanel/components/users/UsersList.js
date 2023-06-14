@@ -49,6 +49,11 @@ const UsersList = () => {
               <TableCell
                 sx={{ fontSize: '16px', fontWeight: 600, color: '#fff' }}
               >
+                Type
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '16px', fontWeight: 600, color: '#fff' }}
+              >
                 Status
               </TableCell>
               <TableCell></TableCell>

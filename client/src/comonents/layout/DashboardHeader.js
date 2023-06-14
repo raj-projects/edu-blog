@@ -15,31 +15,32 @@ function DashboardHeader() {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%'
             }}
           >
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+            <Link
+              to="dashboard"
+              style={{
+                textDecoration: 'none',
+                color: '#fff',
+                fontSize: '20px',
+                fontWeight: 'bold',
               }}
             >
-              <Typography variant="h6" component="div">
-                EduBlogs
-              </Typography>
-              <Link
-                to="/"
-                style={{
-                  padding: '0 10px',
-                  textDecoration: 'none',
-                  color: '#fff',
-                  cursor: 'pointer',
-                }}
-              >
-                Logout
-              </Link>
-            </Box>
+              EduBlogs
+            </Link>
+            <Link
+              to="/"
+              style={{
+                padding: '0 10px',
+                textDecoration: 'none',
+                color: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              Logout
+            </Link>
           </Box>
         </Toolbar>
       </Box>

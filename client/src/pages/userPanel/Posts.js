@@ -4,6 +4,7 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import Spinner from '../../comonents/shared/Spinner';
 import { GET_POSTS } from '../../queries/queries';
+import { Link } from 'react-router-dom';
 
 const Posts = () => {
   const { loading, error, data } = useQuery(GET_POSTS);
@@ -31,7 +32,7 @@ const Posts = () => {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                <a href={`/posts/${post.id}`}>{post.name}</a>
+                <Link to={`/posts/${post.id}`}>{post.name}</Link>
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {post.description}

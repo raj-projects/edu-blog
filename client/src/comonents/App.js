@@ -27,6 +27,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="category" element={<Categories />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<Dashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="dashboard" element={<Dashboard />}>

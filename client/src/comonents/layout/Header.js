@@ -21,7 +21,14 @@ function Header() {
             }}
           >
             <Typography to="/" variant="h5" component="div">
-              <Link to="/" style={{ textDecoration: 'none', color: '#fff', fontWeight: 'bo;d' }}>
+              <Link
+                to="/"
+                style={{
+                  textDecoration: 'none',
+                  color: '#fff',
+                  fontWeight: 'bo;d',
+                }}
+              >
                 EduBlogs
               </Link>
             </Typography>
@@ -75,6 +82,18 @@ function Header() {
                 }}
               >
                 Contact
+              </Link>
+              <>|</>
+              <Link
+                to="dashboard"
+                style={{
+                  padding: '0 10px',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                Login
               </Link>
             </Box>
           </Box>

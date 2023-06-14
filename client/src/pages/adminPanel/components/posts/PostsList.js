@@ -11,7 +11,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { DELETE_POST, GET_POSTS } from '../../../../queries/queries';
+import { GET_POSTS } from '../../../../queries/queries';
 import AddPost from './AddPost';
 import PostsRow from './PostsRow';
 
@@ -45,6 +45,11 @@ const PostsList = () => {
                 sx={{ fontSize: '16px', fontWeight: 600, color: '#fff' }}
               >
                 Name
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '16px', fontWeight: 600, color: '#fff' }}
+              >
+                Description
               </TableCell>
               <TableCell
                 sx={{ fontSize: '16px', fontWeight: 600, color: '#fff' }}

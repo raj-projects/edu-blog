@@ -2,8 +2,8 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { DELETE_CATEGORY, GET_CATEGORIES } from '../../../../queries/queries';
+import EditCategory from './EditCategory';
 
 const CategoriesRow = ({ category }) => {
   const [deleteCategory] = useMutation(DELETE_CATEGORY, {
@@ -16,10 +16,17 @@ const CategoriesRow = ({ category }) => {
       <TableCell>{category.id}</TableCell>
       <TableCell>{category.name}</TableCell>
       <TableCell>{category.status}</TableCell>
-      <TableCell align="right">
-        <IconButton aria-label="edit" size="small" sx={{ marginRight: '20px' }}>
-          <EditIcon fontSize="small" />
-        </IconButton>
+      <TableCell
+        align="right"
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'right',
+          alignItems: 'center',
+          gap: '10px',
+        }}
+      >
+        <EditCategory categoryinfo={category} />
         <IconButton aria-label="delete" size="small">
           <DeleteIcon fontSize="small" color="error" onClick={deleteCategory} />
         </IconButton>

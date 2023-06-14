@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box, CardMedia, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import { useQuery } from '@apollo/client';
 import { GET_POST } from '../../queries/queries';
@@ -24,11 +24,21 @@ function PostDetail() {
     <>
       {!loading && !error && (
         <Container>
-          <Link to="/" align='right'>Back</Link>
-          <Box sx={{marginTop: '20px'}}>
-            <Typography variant='h5'>{data.post.name}</Typography>
-            <small>{data.post.status}</small>
-            <p>{data.post.description}</p>
+          <Link to="/" align="right">
+            Back
+          </Link>
+          <Box sx={{ marginTop: '20px' }}>
+            <CardMedia
+              component="img"
+              alt="green iguana"
+              height="400"
+              image="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+            />
+            <Box sx={{marginTop: '20px'}}>
+              <Typography variant="h5">{data.post.name}</Typography>
+              <small>{data.post.status}</small>
+              <p>{data.post.description}</p>
+            </Box>
           </Box>
         </Container>
       )}

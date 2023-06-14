@@ -1,11 +1,17 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Grid, InputLabel, TextField } from '@mui/material';
-import { ApolloError, useMutation } from '@apollo/client';
-import { ADD_USER, GET_USERS } from '../../../../queries/queries';
+import {
+  Grid,
+  IconButton,
+  InputLabel,
+  TextField,
+  Button,
+  Typography,
+  Modal,
+  Box,
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import { useMutation } from '@apollo/client';
+import { GET_CATEGORY, UPDATE_CATEGORY } from '../../../../queries/queries';
 
 const style = {
   position: 'absolute',
@@ -19,44 +25,43 @@ const style = {
   p: 4,
 };
 
-export default function AddUser() {
+export default function EditCategory({ categoryinfo }) {
   const [open, setOpen] = React.useState(false);
-  const [formState, setFormState] = React.useState({
-    name: 'Test User 1',
-    type: 'user',
-    status: 'Active',
-  });
+  const [name, setName] = React.useState(categoryinfo.name);
+  const [status, setStatus] = React.useState(categoryinfo.status);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [createUser] = useMutation(ADD_USER, {
+  const [updateCategory] = useMutation(UPDATE_CATEGORY, {
     variables: {
-      name: formState.name,
-      type: formState.type,
-      status: formState.status,
+      id: categoryinfo.id,
+      name,
+      status,
     },
-    update(cache, { data: { addUser } }) {
-      const { users } = cache.readQuery({
-        query: GET_USERS,
-      });
-      cache.writeQuery({
-        query: GET_USERS,
-        data: { users: [...users, addUser] },
-      });
-    },
+    refetchQueries: [
+      { query: GET_CATEGORY, variables: { id: categoryinfo.id } },
+    ],
   });
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    createUser();
+    if (!name || !status) {
+      return alert('Please fill all fields');
+    }
+    updateCategory(name, status);
   };
 
   return (
     <div>
-      <Button variant="contained" color="success" onClick={handleOpen}>
-        Add New User
-      </Button>
+      <IconButton
+        aria-label="edit"
+        size="small"
+        color="success"
+        onClick={handleOpen}
+      >
+        <EditIcon fontSize="small" />
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
@@ -66,15 +71,15 @@ export default function AddUser() {
         <Box sx={style}>
           <Grid container spacing={2} sx={{ marginBottom: '20px' }}>
             <Grid item xs={8}>
-              <Typography variant="h5">Add New User</Typography>
+              <Typography variant="h5">Update Category</Typography>
             </Grid>
             <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'right' }}>
               <Button onClick={handleClose}>X</Button>
             </Grid>
           </Grid>
           <form
-            onSubmit={handleSubmit}
             sx={{ display: 'flex', justifyContent: 'center' }}
+            onClick={handleUpdate}
           >
             <Grid container spacing={3}>
               <Grid item xs={12} sm={2}>
@@ -99,44 +104,8 @@ export default function AddUser() {
                   size="small"
                   autoComplete="off"
                   variant="outlined"
-                  value={formState.name}
-                  onChange={(e) =>
-                    setFormState({
-                      ...formState,
-                      name: e.target.value,
-                    })
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={2}>
-                <InputLabel
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItem: 'center',
-                    fontWeight: 700,
-                  }}
-                >
-                  Type
-                </InputLabel>
-              </Grid>
-              <Grid item xs={12} sm={10}>
-                <TextField
-                  required
-                  id="type"
-                  name="type"
-                  label="type"
-                  fullWidth
-                  size="small"
-                  autoComplete="off"
-                  variant="outlined"
-                  value={formState.type}
-                  onChange={(e) =>
-                    setFormState({
-                      ...formState,
-                      type: e.target.value,
-                    })
-                  }
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={2}>
@@ -161,13 +130,8 @@ export default function AddUser() {
                   size="small"
                   autoComplete="off"
                   variant="outlined"
-                  value={formState.status}
-                  onChange={(e) =>
-                    setFormState({
-                      ...formState,
-                      status: e.target.value,
-                    })
-                  }
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
                 />
               </Grid>
             </Grid>
