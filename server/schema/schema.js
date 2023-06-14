@@ -254,15 +254,16 @@ const Mutation = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         type: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: 'UserStatusUpdate',
-            values: {
-              active: { value: 'Active' },
-              Deactive: { value: 'De Active' },
-            },
-          }),
-        },
+        status: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: 'UserStatusUpdate',
+        //     values: {
+        //       active: { value: 'Active' },
+        //       Deactive: { value: 'De Active' },
+        //     },
+        //   }),
+        // },
       },
       resolve(parent, args, context, info) {
         return UserModel.findByIdAndUpdate(
@@ -286,15 +287,16 @@ const Mutation = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: 'PostStatusUpdate',
-            values: {
-              notPublished: { value: 'Not Published' },
-              published: { value: 'Published' },
-            },
-          }),
-        },
+        status: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: 'PostStatusUpdate',
+        //     values: {
+        //       notPublished: { value: 'Not Published' },
+        //       published: { value: 'Published' },
+        //     },
+        //   }),
+        // },
         categoryId: { type: GraphQLID },
         userId: { type: GraphQLID },
       },
@@ -319,15 +321,16 @@ const Mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID },
         name: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: 'CategoryStatusUpdate',
-            values: {
-              active: { value: 'Active' },
-              deactive: { value: 'De-Active' },
-            },
-          }),
-        },
+        status: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: 'CategoryStatusUpdate',
+        //     values: {
+        //       active: { value: 'Active' },
+        //       deactive: { value: 'De-Active' },
+        //     },
+        //   }),
+        // },
       },
       resolve(parent, args, context, info) {
         return CategoryModel.findByIdAndUpdate(
