@@ -2,7 +2,7 @@ const express = require('express');
 const userModel = require('../models/user.model');
 const router = express.Router();
 
-router.get('/login', async (req, res) => { })
+// router.get('/login', async (req, res) => { })
     
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -11,7 +11,8 @@ router.post('/login', async (req, res) => {
     const check = await userModel.findOne({ email: email });
 
     if (check) {
-        res.json({data : email, message: 'exist'})
+        res.json('exist');
+        // res.json({ data: email, message: 'exist' });
     } else {
       res.json('notexist');
     }
