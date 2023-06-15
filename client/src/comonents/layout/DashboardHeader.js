@@ -4,8 +4,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import Logout from '../../pages/userPanel/auth/AuthButton';
 
-function DashboardHeader() {
+function DashboardHeader({ location }) {
   return (
     <AppBar sx={{ marginBottom: '10px' }}>
       <Box position="static">
@@ -16,11 +17,11 @@ function DashboardHeader() {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              width: '100%'
+              width: '100%',
             }}
           >
             <Link
-              to="dashboard"
+              to="/dashboard"
               style={{
                 textDecoration: 'none',
                 color: '#fff',
@@ -30,17 +31,20 @@ function DashboardHeader() {
             >
               EduBlogs
             </Link>
-            <Link
-              to="/"
-              style={{
-                padding: '0 10px',
-                textDecoration: 'none',
-                color: '#fff',
-                cursor: 'pointer'
-              }}
-            >
-              Logout
-            </Link>
+            <Box>
+              {/* <Typography>{location.state.id}</Typography> */}
+              <Link
+                to="/"
+                style={{
+                  padding: '0 10px',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                Logout
+              </Link>
+            </Box>
           </Box>
         </Toolbar>
       </Box>

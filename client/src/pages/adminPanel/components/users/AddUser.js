@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Grid, InputLabel, TextField } from '@mui/material';
-import { ApolloError, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { ADD_USER, GET_USERS } from '../../../../queries/queries';
 
 const style = {
@@ -22,9 +22,9 @@ const style = {
 export default function AddUser() {
   const [open, setOpen] = React.useState(false);
   const [formState, setFormState] = React.useState({
-    name: 'Test User 1',
-    type: 'user',
-    status: 'Active',
+    name: '',
+    type: '',
+    status: '',
   });
 
   const handleOpen = () => setOpen(true);

@@ -85,7 +85,7 @@ function Header() {
               </Link>
               <>|</>
               <Link
-                to="dashboard"
+                to="login"
                 style={{
                   padding: '0 10px',
                   textDecoration: 'none',

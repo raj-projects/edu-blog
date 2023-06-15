@@ -5,6 +5,8 @@ const GET_USERS = gql`
     users {
       id
       name
+      email
+      password
       type
       status
     }
@@ -16,6 +18,8 @@ const GET_USER = gql`
     user(id: $id) {
       id
       name
+      email
+      password
       type
       status
     }
@@ -64,6 +68,21 @@ const GET_CATEGORY = gql`
   }
 `;
 
+const GET_CURRENT_USER = gql`
+  query CurrentUser($email: String!, $password: String!) {
+    currentUser(email: $email, password: $password) {
+      name
+      email
+    }
+  }
+`;
+
+const LOGIN_USER = gql`
+  mutation LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password)
+  }
+`;
+
 /*========================
   Delete Mutations
 ========================*/
@@ -72,6 +91,8 @@ const DELETE_USER = gql`
     deleteUser(id: $id) {
       id
       name
+      email
+      password
       type
       status
     }
@@ -103,10 +124,12 @@ const DELETE_CATEGORY = gql`
   Add Mutations
 ========================*/
 const ADD_USER = gql`
-  mutation AddUser($name: String!, $type: String!, $status: String!) {
-    addUser(name: $name, type: $type, status: $status) {
+  mutation AddUser($name: String!, $email: String!, $password: String!, $type: String!, $status: String!) {
+    addUser(name: $name, email: $email, password: $password, type: $type, status: $status) {
       id
       name
+      email
+      password
       type
       status
     }
@@ -141,12 +164,23 @@ const UPDATE_USER = gql`
   mutation UpdateUser(
     $id: ID!
     $name: String!
+    $email: String!
+    $password: String!
     $type: String!
     $status: String!
   ) {
-    updateUser(id: $id, name: $name, type: $type, status: $status) {
+    updateUser(
+      id: $id
+      name: $name
+      email: $email
+      password: $password
+      type: $type
+      status: $status
+    ) {
       id
       name
+      email
+      password
       type
       status
     }
@@ -191,6 +225,8 @@ export {
   GET_POST,
   GET_CATEGORIES,
   GET_CATEGORY,
+  GET_CURRENT_USER,
+  LOGIN_USER,
   DELETE_USER,
   DELETE_POST,
   DELETE_CATEGORY,

@@ -15,6 +15,9 @@ import AddCategory from '../pages/adminPanel/components/categories/AddCategory';
 import Posts from '../pages/userPanel/Posts';
 import PageNotFound from '../pages/userPanel/PageNotFound';
 import PostDetail from '../pages/userPanel/PostDetail';
+import Login from '../pages/userPanel/auth/Login';
+import DashboardContent from '../pages/adminPanel/components/DashboardContent';
+import NoPage from '../pages/adminPanel/components/404-Page';
 
 function App() {
   return (
@@ -27,17 +30,18 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="category" element={<Categories />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="login" element={<Dashboard />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
           <Route path="dashboard" element={<Dashboard />}>
-            <Route index path="userlist" element={<UsersList />} />
+            <Route index element={<DashboardContent />} />
+            <Route path="userlist" element={<UsersList />} />
             <Route path="adduser" element={<AddUser />} />
             <Route path="postlist" element={<PostsList />} />
             <Route path="addpost" element={<AddPost />} />
             <Route index path="categorieslist" element={<CategoryList />} />
             <Route path="addcategory" element={<AddCategory />} />
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
       </Box>

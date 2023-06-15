@@ -30,11 +30,6 @@ export default function EditPost({ postinfo }) {
   const [name, setName] = React.useState(postinfo.name);
   const [description, setDescription] = React.useState(postinfo.description);
   const [status, setStatus] = React.useState(postinfo.status);
-  //   const [formState, setFormState] = React.useState({
-  //     name: postinfo.name,
-  //     type: postinfo.type,
-  //     status: postinfo.status,
-  //   });
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

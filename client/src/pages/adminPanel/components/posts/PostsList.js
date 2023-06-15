@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import {
   Grid,
   Paper,
