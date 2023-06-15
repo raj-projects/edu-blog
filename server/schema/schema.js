@@ -110,7 +110,36 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: graphql.GraphQLID } },
       resolve(parent, args) {
-        return UserModel.find(args.id);
+        return UserModel.findById(args.id);
+      },
+    },
+
+    /*=================================
+      AUTH Mutation
+    =================================*/
+    currentUser: {
+      type: UserType,
+      args: {
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return UserModel.find();
+      },
+    },
+
+    loginUser: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return UserModel({
+          name: args.name,
+          email: args.email,
+          password: args.password,
+        });
       },
     },
   }),
@@ -129,7 +158,7 @@ const Mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         email: { type: GraphQLString },
-        type: { type: GraphQLString },
+        password: { type: GraphQLString },
         type: { type: GraphQLString },
         status: { type: GraphQLString },
         // status: {
@@ -352,11 +381,6 @@ const Mutation = new GraphQLObjectType({
         );
       },
     },
-
-    /*=================================
-      AUTH Mutation
-    =================================*/
-
   },
 });
 
