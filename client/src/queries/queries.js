@@ -68,20 +68,15 @@ const GET_CATEGORY = gql`
   }
 `;
 
-const GET_CURRENT_USER = gql`
-  query CurrentUser($email: String!, $password: String!) {
-    currentUser(email: $email, password: $password) {
-      name
-      email
-    }
+/*========================
+  AUTH Mutations
+========================*/
+const REGISTER_USER = gql`
+  mutation RegisterUser($email: String!, $password: String!) {
+    registerUser(email: $email, password: $password)
   }
 `;
 
-const LOGIN_USER = gql`
-  mutation LoginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password)
-  }
-`;
 
 /*========================
   Delete Mutations
